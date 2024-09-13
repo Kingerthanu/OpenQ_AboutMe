@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Landing Page</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+        /* Global Styles */
+        body {
+            font-family: 'VT323', monospace;
+            background-color: #000;
+            color: #0f0;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        /* Container In Which Main Page Content Resides */
+        #container {
+            padding: 20px;
+            position: relative;
+            z-index: 2;
+            max-width: 80%;
+            overflow-y: auto;
+            max-height: 80vh;
+            border-radius: 15px;
+            background-color: rgba(0, 0, 0, 0.95);
+            box-shadow: 0 0 20px rgba(0, 255, 0, 0.8), 0 0 40px rgba(255, 255, 0, 0.3);
+        }
+
+        /* Shared Header Styles Of Both h1 And h2 */
+        h1, h2 {
+            font-family: 'Press Start 2P', cursive;
+            color: #0f0;
+            text-align: center;
+            margin-bottom: 20px;
+            text-shadow: 0 0 10px #0f0, 0 0 20px #ff0;
+            animation: fadeIn 2s ease-in-out;
+        }
+
+        /* Unique Font Size Of This Header */
+        h1 {
+            font-size: 36px;
+        }
+
+        /* Unique Font Size Of This Header */
+        h2 {
+            font-size: 28px;
+        }
+
+        /* Section Container Style */
+        .section {
+            margin: 40px 0;
+            text-align: center;
+        }
+
+        /* For A Given Image In Which Is Located In A Section */
+        .section img {
+            width: 100%;
+            max-width: 400px;
+            margin: 20px auto;
+            border-radius: 10px;
+            border: 2px solid #ff0;
+            box-shadow: 0 0 20px rgba(0, 255, 0, 0.7), 0 0 40px rgba(255, 255, 0, 0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        /* When We Hover Over A Image Located In A Given Section */
+        .section img:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 30px rgba(0, 255, 0, 0.9), 0 0 60px rgba(255, 255, 0, 0.5);
+        }
+
+        /* Paragraph Part Of A Given Section */
+        .section p {
+            font-size: 18px;
+            line-height: 1.6;
+            text-shadow: 0 0 5px rgb(1, 56, 59), 0 0 10px rgb(34, 94, 34);
+            margin-bottom: 20px;
+        }
+
+        /* Button Styles */
+        .button-container {
+            margin-top: 100px; /* Increased margin to push it lower */
+            text-align: left;
+        }
+
+        /* Button Used To Return To Main Page */
+        .back-button {
+            background-color: #0f0;
+            border: none;
+            color: black;
+            padding: 15px 30px;
+            font-size: 20px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
+            box-shadow: 0 0 10px #0f0, 0 0 20px #0f0, 0 0 30px #0f0;
+        }
+
+        
+        /* When We Hover Over The Back To Main Page Button */
+        .back-button:hover {
+            background-color: #000;
+            color: #0f0;
+            border: 2px solid #0f0;
+            transform: scale(1.1);
+        }
+
+        /* Social Media Icons */
+        .socials {
+            display: flex;
+            justify-content: center;
+            margin: 4px 0;
+        }
+
+        /* Hyper-Link Style */ 
+        .socials a {
+            margin: 0 10px;
+            text-decoration: none;
+            color: #0f0;
+            font-size: 20px;
+            transition: color 0.3s ease;
+        }
+
+        /* When We Hover Over Our Hyper-Links */
+        .socials a:hover {
+            color: #ff0;
+        }
+
+        /* Email Section */
+        .email-section {
+            margin: 100px 0 80px; /* Increased top margin to move this section lower */
+            text-align: center;
+        }
+
+        /* Style For Our Email Me Section */
+        .email-section input, .email-section textarea {
+            width: 80%;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border: 1px solid #0f0;
+            background-color: #000;
+            color: #0f0;
+            font-family: 'VT323', monospace;
+            font-size: 16px;
+            box-sizing: border-box; /* Ensure padding doesn't affect width */
+        }
+
+        /* Style For Email Me Submit Button */
+        .email-section button {
+            background-color: #0f0;
+            border: none;
+            color: black;
+            padding: 10px 20px;
+            font-size: 18px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
+            box-shadow: 0 0 10px #0f0, 0 0 20px #0f0, 0 0 30px #0f0;
+            margin-top: 20px; /* Ensure the button stays below the form */
+        }
+
+        /* Our Email Container */
+        .email-section form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* When We Hover Over Our Submit Button */
+        .email-section button:hover {
+            background-color: #000;
+            color: #0f0;
+            border: 2px solid #0f0;
+            transform: scale(1.1);
+        }
+
+        /* Keyframes For Fade-In Of Background Dots */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* Particle Style For Background */
+        .particle {
+            position: absolute;
+            background: rgba(0, 255, 0, 0.5);
+            border-radius: 50%;
+            animation: moveParticle 10s linear infinite, pulseParticle 2s ease-in-out infinite;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* Keyframes For A Moving Particle */
+        @keyframes moveParticle {
+            0% { transform: translateX(0) translateY(0); }
+            100% { transform: translateX(-200px) translateY(-500px); }
+        }
+
+        /* Keyframes For A Particle Pulsing In And Out Of Vision */
+        @keyframes pulseParticle {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.5); }
+        }
+
+        /* The Backdrop (Matrix Effect Background) */
+        .matrix-bg {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            background: black;
+            overflow: hidden;
+            z-index: 1;
+            opacity: 0.8;
+        }
+
+        /* Container For Our Backdrop */ 
+        .matrix-bg canvas {
+            display: block;
+        }
+
+        /* Background Lines In Our Backdrop */
+        .line {
+            position: absolute;
+            width: 2px;
+            height: 100%;
+            background-color: rgba(0, 255, 0, 0.2);
+            animation: moveLine 5s linear infinite;
+            z-index: 0;
+        }
+
+        /* Keyframes For Our Lines In The Backdrop */
+        @keyframes moveLine {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(-100%); }
+        }
+
+        /* Background Dots Style */
+        .dot {
+            position: absolute;
+            width: 5px;
+            height: 5px;
+            background-color: #0f0;
+            border-radius: 50%;
+            animation: blinkDot 2s infinite ease-in-out;
+            z-index: 0;
+        }
+
+        /* Fade-In And Out The Dots */
+        @keyframes blinkDot {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Main Box In Which User Scrolls Through -->
+    <div id="container">
+        <!-- Lead Context Header -->
+        <header>
+            <h1>Ben Spitzauer</h1>
+        </header>
+
+        <!-- Description Of Header Section -->
+        <section class="section">
+            <h2>Low-Level Full-Stack Developer</h2>
+            <p>Mainly Develops On C++ & Other C Family Languages</p>
+            <img src="./synapseGrowth.gif" alt="Cellular Automata Of Synaptic Growth">
+        </section>
+
+        <!-- Portfolio Section -->
+        <section class="section">
+            <h2>Who Am I?</h2>
+            <p>Hiya, I'm Ben! <br> I'm A Senior At Seattle University With A Specialty In Low-Level Development. I Work Mainly In The C++ And Other C-Family Languages On Simulations And Algorithmic Development. I Really Enjoy Doing The Heavy Lifting Of Computer Science, Making My Projects With The Least Amount Of External Libraries As Possible (Of Course Within Reason [I Think I'd Die If I Didn't Use glm On Matrices]) As I Enjoy Understanding My Codebase In And Out. I Got Into Coding Quite Early In My Life After Realizing My Other Passion--Environmental Restoration--Was Being Taken Over With Technology. I Grew Up Doing Online School And It Allowed Me To Be Acquainted With Computers Very Early In My Life So Making The Jump In Profession Wasn't That Huge Of A Leap. I Finally Committed After Some On-And-Off Assignments During A Highschool AP Computer Science Class In Which I Initially Was One Of The Weakest Students In The Class. I Had A Night In Which I Decided To Clock-In As Hard As I Could To See If It Really Was For Me And This Caused Me To Boot Up StackOverflow And I Fell Into A Rabbit Hole. That Night I Stayed Up Till 5am On A School Night And It Made Me Realize My Drive To Learn And Get Into This Sphere Of Science. I've Been Doing Project Development For My Personal Projects For Around 7+ Years And In These Years It Has Allowed Me To Greatly Grow As A Person And A Developer. I've Tried To Always Challenge Myself And Learn New Aspects Of Computer Science Like Doing Simulations For Polymorphic Hierachical Development; Also Doing A Morse Code Interpretor To Understand Sound Drivers And How To Parse Audio Buffers. Throughout The Years I've Tried And Done A Lot And Will Continue To Strive To Become A Better Developer.</p>
+            <img src="./sandphysics.gif" alt="Sand Pixel Physics Simulation Showing Sand Falling Into Piles">
+        </section>
+
+        <!-- Current Work Feats At OpenQQuantify -->
+        <section class="section">
+            <h2>Worked On Components</h2>
+            <p>Currently I've Helped Foundationalize The Codebase Pertaining To The Arduino Mega 2560 Rev3 Board. Through The Utilization Of Public Documentation I've Helped Fine Tune Models Pertaining To The Board As Well As Helped Work On The RISC-V Family ISA Architecture.</p>
+            <img src="./circuit.gif" alt="Lines Growing Upward As Spires And Compounding">
+        </section>
+
+        <!-- Email Section -->
+        <section class="email-section">
+            <h2>Contact Me</h2>
+            <form action="mailto:benspitzauer@gmail.com" method="POST" enctype="text/plain">
+                <input type="text" name="name" placeholder="Your Name" required>
+                <input type="email" name="email" placeholder="Your Email" required>
+                <textarea name="message" placeholder="Your Message" rows="5" required></textarea>
+                <button type="submit">Send Email</button>
+            </form>
+        </section>
+
+        <!-- Social Media Links -->
+        <section class="section">
+            <h2>Follow Me</h2>
+            <div class="socials">
+                <a href="https://github.com/Kingerthanu" target="_blank">GitHub</a>
+                <a href="https://www.linkedin.com/in/ben-spitzauer-688169245/" target="_blank">LinkedIn</a>
+                <a href="https://www.codewars.com/users/Kingerthanu" target="_blank">CodeWars</a>
+                <a href="https://leetcode.com/u/Kingerthanu/" target="_blank">LeetCode</a>
+            </div>
+        </section>
+
+        <!-- Button To Return Us To The Users Previous Page -->
+        <div class="button-container">
+            <a href="javascript:history.back()" class="back-button">Back to Previous Page</a>
+        </div>
+    </div>
+
+    <!-- Particle Effects -->
+    <script>
+        for (let i = 0; i < 100; i++) {
+            const particle = document.createElement('div');
+            particle.classList.add('particle');
+            document.body.appendChild(particle);
+            particle.style.width = `${Math.random() * 10 + 5}px`;
+            particle.style.height = `${Math.random() * 10 + 5}px`;
+            particle.style.left = `${Math.random() * 100}%`;
+            particle.style.top = `${Math.random() * 100}%`;
+            particle.style.animationDuration = `${Math.random() * 10 + 5}s`;
+            particle.style.animationDelay = `${Math.random() * 5}s`;
+        }
+    </script>
+
+    <!-- Background Lines -->
+    <script>
+        for (let i = 0; i < 10; i++) {
+            const line = document.createElement('div');
+            line.classList.add('line');
+            document.body.appendChild(line);
+            line.style.left = `${i * 10}%`;
+        }
+    </script>
+
+    <!-- Background Dots -->
+    <script>
+        for (let i = 0; i < 50; i++) {
+            const dot = document.createElement('div');
+            dot.classList.add('dot');
+            document.body.appendChild(dot);
+            dot.style.left = `${Math.random() * 100}%`;
+            dot.style.top = `${Math.random() * 100}%`;
+            dot.style.animationDelay = `${Math.random() * 2}s`;
+        }
+    </script>
+</body>
+</html>
